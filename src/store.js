@@ -1,8 +1,8 @@
 import { byNewest, hashPassword, uid } from "./utils.js";
 import { createSeedState } from "./seed.js";
 
-const DATA_KEY = "connect-social-data-v1";
-const SESSION_KEY = "connect-social-session-v1";
+const DATA_KEY = "connect-social-data-v2";
+const SESSION_KEY = "connect-social-session-v2";
 
 let state = null;
 const listeners = new Set();

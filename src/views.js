@@ -600,11 +600,11 @@ export function renderAuth(mode = "login") {
     el("p", { class: "auth-note" }, ["This is frontend-only authentication. It is not secure and is not a real account system."]),
     el("div", { class: "demo-box" }, [
       el("h3", {}, ["Demo account"]),
-      el("p", {}, ["rehan@connect.app"]),
-      el("p", {}, ["password123"]),
+      el("p", {}, ["faizan@connect.app"]),
+      el("p", {}, ["faizan"]),
       el("button", { class: "btn btn-ghost", type: "button", onclick: () => {
-        email.value = "rehan@connect.app";
-        password.value = "password123";
+        email.value = "faizan@connect.app";
+        password.value = "faizan";
         email.focus();
       } }, ["Fill demo login"]),
     ]),

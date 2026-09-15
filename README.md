@@ -6,8 +6,8 @@ This is a **frontend-only** demo. Posts, comments, messages, and login state per
 
 ## Demo login
 
-- Email: `rehan@connect.app`
-- Password: `password123`
+- Email: `faizan@connect.app`
+- Password: `faizan`
 
 The same password works for the other seeded people (`dhrati@connect.app`, `izhar@connect.app`, `shrilekha@connect.app`, `aisha@connect.app`, `nate@connect.app`).
 

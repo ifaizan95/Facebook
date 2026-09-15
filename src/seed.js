@@ -3,7 +3,7 @@ import { hashPassword, uid } from "./utils.js";
 const hour = 60 * 60 * 1000;
 const day = 24 * hour;
 
-export const DEMO_PASSWORD = "password123";
+export const DEMO_PASSWORD = "faizan";
 
 export async function createSeedState() {
   const passwordHash = await hashPassword(DEMO_PASSWORD);
@@ -12,8 +12,8 @@ export async function createSeedState() {
   const users = [
     {
       id: "u_rehan",
-      name: "Rehan Khan",
-      email: "rehan@connect.app",
+      name: "Faizan",
+      email: "faizan@connect.app",
       passwordHash,
       avatar: "/facebook/profile-pic.png",
       cover: "/facebook/cover.png",
