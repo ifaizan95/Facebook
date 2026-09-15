@@ -37,6 +37,8 @@
 
 html, body {
     min-height: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
@@ -160,6 +162,11 @@ nav {
     align-items: center;
 }
 
+.nav-left {
+    flex: 1;
+    min-width: 0;
+}
+
 .nav-center {
     flex: 1;
     justify-content: center;
@@ -199,7 +206,10 @@ nav {
     display: flex;
     align-items: center;
     padding: 0 14px;
-    width: min(350px, 32vw);
+    width: auto;
+    flex: 1;
+    min-width: 0;
+    max-width: 350px;
     background: #efefef;
     border-radius: 20px;
     min-height: 40px;
@@ -1622,7 +1632,13 @@ html.compact .post-text {
         display: none;
     }
     .search-box {
-        width: min(220px, 48vw);
+        max-width: none;
+    }
+    .nav-right {
+        flex-shrink: 0;
+    }
+    .round-btn, .nav-user-icon {
+        margin-left: 6px;
     }
     .container {
         padding: 12px 12px 80px;
