@@ -150,7 +150,7 @@ function renderChrome() {
     el("span", { class: "badge", dataset: { badge: "messages" } }),
   ]);
 
-  const nav = el("nav", { "aria-label": "Primary" }, [
+  const nav = el("nav", { class: "topbar", "aria-label": "Primary" }, [
     el("div", { class: "nav-left" }, [
       el("a", { href: "/", class: "brand", "data-link": "true", "aria-label": `${APP_NAME} home` }, [
         el("span", { class: "brand-mark", "aria-hidden": "true" }, ["C"]),
@@ -332,11 +332,13 @@ export function renderApp(meta = {}) {
   else {
     const { nav, left, right, mobileNav } = renderChrome();
     const app = root();
-    app.querySelector("nav")?.replaceWith(nav);
+    app.querySelector("nav.topbar")?.replaceWith(nav);
     app.querySelector(".left-sidebar")?.replaceWith(left);
     app.querySelector(".right-sidebar")?.replaceWith(right);
     app.querySelector(".mobile-nav")?.replaceWith(mobileNav);
   }
+
+  document.querySelector(".container")?.classList.toggle("wide-view", location.route === "messages");
 
   if (!meta.silent) renderView(location);
   else updateBadges();

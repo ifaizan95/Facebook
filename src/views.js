@@ -222,7 +222,7 @@ export function renderMessages(conversationId) {
   const me = store.currentUser();
   const convos = store.myConversations();
   const active = convos.find((item) => item.id === conversationId) || convos[0] || null;
-  const layout = el("section", { class: `messages-layout ${conversationId || active ? "has-thread" : ""}` });
+  const layout = el("section", { class: `messages-layout ${conversationId ? "has-thread" : ""}` });
   const list = el("div", { class: "conversation-list" }, [
     el("div", { class: "messages-head" }, [
       el("h1", {}, ["Messages"]),
@@ -241,7 +241,7 @@ export function renderMessages(conversationId) {
       type: "button",
     }, [
       el("img", { src: other?.avatar, alt: "" }),
-      el("div", {}, [
+      el("div", { class: "convo-meta" }, [
         el("strong", {}, [other?.name || "Unknown"]),
         el("span", {}, [convo.last?.text || "No messages yet"]),
       ]),

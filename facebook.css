@@ -110,7 +110,7 @@ a {
 }
 
 /* ---------------- nav ---------------- */
-nav {
+nav.topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1088,24 +1088,61 @@ nav {
     font-size: 12px;
 }
 
+.container.wide-view .right-sidebar {
+    display: none;
+}
+
+.container.wide-view .main-content {
+    max-width: none;
+    flex: 1 1 auto;
+}
+
 .messages-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    min-height: 68vh;
+    display: flex;
+    align-items: stretch;
+    height: calc(100vh - 110px);
+    min-height: 480px;
     background: var(--card);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow);
+    isolation: isolate;
 }
 
-.conversation-list, .conversation-thread {
+.conversation-list,
+.conversation-thread {
     min-width: 0;
+    min-height: 0;
+    background: var(--card);
 }
 
 .conversation-list {
+    flex: 0 0 280px;
+    width: 280px;
+    max-width: 280px;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.messages-head {
+    position: sticky;
+    top: 0;
+    background: var(--card);
+    z-index: 1;
+}
+
+.conversation-thread {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
 }
 
 .messages-head, .thread-head, .search-toolbar, .search-toolbar-row {
@@ -1114,18 +1151,26 @@ nav {
     justify-content: space-between;
     gap: 8px;
     padding: 12px;
+    flex-shrink: 0;
+}
+
+.thread-head {
+    border-bottom: 1px solid var(--border);
+    justify-content: flex-start;
 }
 
 .convo-item {
     display: grid;
-    grid-template-columns: 42px 1fr auto;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
     gap: 10px;
     width: 100%;
+    max-width: 100%;
     border: 0;
     background: none;
     text-align: left;
     padding: 10px 12px;
     align-items: center;
+    overflow: hidden;
 }
 
 .convo-item img {
@@ -1135,13 +1180,23 @@ nav {
     object-fit: cover;
 }
 
-.convo-item span, .convo-item time {
-    color: var(--muted);
-    font-size: 12px;
+.convo-meta {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.convo-item strong,
+.convo-item span,
+.convo-item time {
     display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.convo-item span, .convo-item time {
+    color: var(--muted);
+    font-size: 12px;
 }
 
 .convo-item.unread strong {
@@ -1152,21 +1207,18 @@ nav {
     background: var(--hover);
 }
 
-.conversation-thread {
-    display: flex;
-    flex-direction: column;
-}
-
 .message-history {
-    flex: 1;
-    overflow: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 12px;
-    max-height: 52vh;
 }
 
 .bubble-row {
     display: flex;
     margin-bottom: 8px;
+    max-width: 100%;
 }
 
 .bubble-row.mine {
@@ -1174,10 +1226,18 @@ nav {
 }
 
 .bubble {
-    max-width: 75%;
+    max-width: min(75%, 420px);
     background: var(--hover);
     border-radius: 16px;
     padding: 8px 12px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.bubble p {
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .bubble-row.mine .bubble {
@@ -1197,6 +1257,11 @@ nav {
     gap: 8px;
     padding: 12px;
     border-top: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.message-composer .text-input {
+    min-width: 0;
 }
 
 .notice {
@@ -1625,7 +1690,7 @@ html.compact .post-text {
 }
 
 @media (max-width: 860px) {
-    nav {
+    nav.topbar {
         padding: 8px 12px;
     }
     .nav-center, .left-sidebar, .brand-name {
@@ -1650,14 +1715,19 @@ html.compact .post-text {
     .mobile-nav {
         display: flex;
         position: fixed;
+        top: auto;
         bottom: 0;
         left: 0;
         right: 0;
+        height: auto;
+        min-height: 56px;
         background: var(--card);
         border-top: 1px solid var(--border);
         z-index: 90;
         justify-content: space-around;
+        align-items: center;
         padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+        box-shadow: none;
     }
     .mobile-nav .nav-icon {
         color: var(--text);
@@ -1672,8 +1742,19 @@ html.compact .post-text {
         top: 2px;
         right: 18%;
     }
-    .profile-grid, .messages-layout, .auth-grid {
+    .profile-grid, .auth-grid {
         grid-template-columns: 1fr;
+    }
+    .messages-layout {
+        height: calc(100vh - 150px);
+        min-height: 420px;
+        margin-bottom: 12px;
+    }
+    .conversation-list {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: none;
+        border-right: 0;
     }
     .profile-identity {
         flex-direction: column;
