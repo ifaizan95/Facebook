@@ -1,0 +1,15 @@
+{
+  "name": "connect-social",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Interactive social network built from the existing static Facebook-inspired site.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
